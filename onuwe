@@ -1,0 +1,23 @@
+<h1>Unscripted Project</h1>
+
+<input type="text" id="question" placeholder="Ask a question">
+<button onclick="answerQuestion()">Search</button>
+
+<p id="answer"></p>
+
+<script>
+function answerQuestion() {
+    let q = document.getElementById("question").value.toLowerCase();
+    let answer = "";
+
+    if (q.includes("hello")) {
+        answer = "Hello! Welcome to Unscripted Project.";
+    } else if (q.includes("photosynthesis")) {
+        answer = "Photosynthesis is how plants make food using sunlight.";
+    } else {
+        answer = "Sorry, I do not know that answer yet.";
+    }
+
+    document.getElementById("answer").innerText = answer;
+}
+</script>
