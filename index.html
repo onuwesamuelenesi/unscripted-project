@@ -1,71 +1,277 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Unscripted Project</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 40px;
-            background: #f4f4f4;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        input {
-            width: 80%;
-            padding: 12px;
-            font-size: 16px;
-        }
+<title>Unscripted Project</title>
 
-        button {
-            padding: 12px 20px;
-            margin-top: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+<style>
 
-        #answer {
-            margin-top: 25px;
-            font-size: 18px;
-        }
-    </style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+header {
+    background: #202123;
+    color: white;
+    padding: 18px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.welcome {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.welcome h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    color: #666;
+}
+
+.chat-box {
+    background: white;
+    border-radius: 12px;
+    min-height: 450px;
+    padding: 20px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    overflow-y: auto;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message-content {
+    max-width: 75%;
+    padding: 14px 16px;
+    border-radius: 15px;
+    line-height: 1.5;
+}
+
+.user .message-content {
+    background: #2563eb;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.bot .message-content {
+    background: #eeeeee;
+    color: #222;
+    border-bottom-left-radius: 4px;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#question {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+#question:focus {
+    border-color: #2563eb;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 0 20px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.clear-button {
+    background: #555;
+    padding: 10px 15px;
+    margin-top: 12px;
+}
+
+.clear-button:hover {
+    background: #333;
+}
+
+.examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.example {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.example:hover {
+    background: #eee;
+}
+
+footer {
+    text-align: center;
+    color: #777;
+    padding: 25px;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 12px;
+    }
+
+    .welcome h1 {
+        font-size: 26px;
+    }
+
+    .chat-box {
+        min-height: 400px;
+    }
+
+    .message-content {
+        max-width: 90%;
+    }
+
+    .input-area {
+        flex-direction: column;
+    }
+
+    button {
+        padding: 14px;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-    <h1>Unscripted Project</h1>
+<header>
+    🤖 Unscripted Project
+</header>
 
-    <p>Ask a question:</p>
+<div class="container">
 
-    <input id="question" type="text" placeholder="Type your question here">
+    <div class="welcome">
+        <h1>How can I help you?</h1>
+        <p>Ask a question and Unscripted Project will respond.</p>
+    </div>
 
-    <br>
+    <div class="chat-box" id="chatBox">
 
-    <button onclick="getAnswer()">Get Answer</button>
+        <div class="message bot">
+            <div class="message-content">
+                Hello! 👋 I'm Unscripted Project. Ask me a question and I'll try to help you.
+            </div>
+        </div>
 
-    <div id="answer"></div>
+    </div>
 
-    <script>
-        function getAnswer() {
-            let question = document.getElementById("question").value.toLowerCase();
-            let answer = document.getElementById("answer");
+    <div class="examples">
+        <div class="example" onclick="askExample('What is physics?')">
+            What is physics?
+        </div>
 
-            if (question.includes("hello")) {
-                answer.innerHTML = "Hello! Welcome to Unscripted Project.";
-            }
-            else if (question.includes("name")) {
-                answer.innerHTML = "This website is called Unscripted Project.";
-            }
-            else if (question.includes("what is html")) {
-                answer.innerHTML = "HTML is the language used to structure webpages.";
-            }
-            else if (question.includes("what is javascript")) {
-                answer.innerHTML = "JavaScript is a programming language that can make webpages interactive.";
-            }
-            else {
-                answer.innerHTML = "Sorry, I don't know the answer to that question yet.";
-            }
-        }
-    </script>
+        <div class="example" onclick="askExample('What is mathematics?')">
+            What is mathematics?
+        </div>
 
-</body>
-</html>
+        <div class="example" onclick="askExample('Explain photosynthesis')">
+            Explain photosynthesis
+        </div>
+
+        <div class="example" onclick="askExample('What is HTML?')">
+            What is HTML?
+        </div>
+    </div>
+
+    <div class="input-area">
+
+        <input
+            type="text"
+            id="question"
+            placeholder="Ask anything..."
+            onkeydown="handleKey(event)"
+        >
+
+        <button onclick="sendQuestion()">
+            Send
+        </button>
+
+    </div>
+
+    <button class="clear-button" onclick="clearChat()">
+        Clear Chat
+    </button>
+
+</div>
+
+<footer>
+    © 2026 Unscripted Project
+</footer>
+
+
+<script>
+
+function sendQuestion() {
+
+    const input = document.getElementById("question");
+    const question = input.value.trim();
+
+    if (question === "") {
+        return;
+    }
+
+    addMessage(question, "user");
+
+    input.value = "";
+
+    setTimeout(function() {
+
+        const answer = getAnswer(question);
+
+        addMessage(answer, "bot");
+
+    }, 500);
+}o
